@@ -17,6 +17,8 @@
 #h2text {
   padding-left: 10%;
   margin-bottom: 2%;
+  border-bottom: solid 2px rgb(191, 191, 194);
+  padding-bottom: 1%;
 }
 
 #ftext {
@@ -39,4 +41,9 @@
 #h3text {
   padding-bottom: 1%;
   border-bottom: solid 1px rgb(191, 191, 194);
+}
+
+#guestbook {
+  margin-top: 2%;
+  margin-left: 2%;
 }
