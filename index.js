@@ -1,7 +1,7 @@
 // Import express, file system, node-fetch
 const express = require('express');
 const fs = require('fs');
-const nodeFetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 // Start express
 const app = express();

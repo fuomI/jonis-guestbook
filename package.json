@@ -1,6 +1,22 @@
 {
+  "name": "Joni's Guestbook",
+  "version": "1.0.0",
+  "description": "Joni's guestbook app in Heroku",
+  "main": "index.js",
+  "engines": {
+    "node": "17.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "keyword": [],
+  "author": "Joni Jansson",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "axios": "^0.21.1",
+    "request": "^2.88.2"
   }
 }
