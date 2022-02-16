@@ -11,14 +11,13 @@ const PORT = process.env.PORT || 5000;
 
 // Add the body-parser module to handle form data
 const bodyParser = require('body-parser');
+const { redirect } = require('express/lib/response');
 
 // Enable body parser
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Serve static content from public dir
 app.use(express.static('public'));
-
-
 
 // THE ROUTES
 // **********
@@ -36,7 +35,7 @@ app.get('/guestbook', function (req, res) {
     let data = require('./guestbookData.json');
 
     // Get header and navbar
-    let guestbookContent = fs.readFileSync(__dirname + '/guestbook.html', err => {
+    let guestbookContent = fs.readFileSync(__dirname + '/guestbook.html', (err) => {
         if (err) throw err;
     });
 
@@ -50,8 +49,8 @@ app.get('/guestbook', function (req, res) {
     contentString += '<tr>';
     contentString += '<th>#</th>';
     contentString += '<th>Name</th>';
-    contentString += '<th>Message</th>';
     contentString += '<th>Country</th>';
+    contentString += '<th>Message</th>';
     contentString += '</tr>';
     contentString += '</thead>';
     contentString += '<tbody>';
@@ -70,7 +69,7 @@ app.get('/guestbook', function (req, res) {
     contentString += '</table>';
 
     // Add footer
-    let footer = fs.readFileSync(__dirname + '/footer.html', err => {
+    let footer = fs.readFileSync(__dirname + '/footer.html', (err) => {
         if (err) throw err;
     });
 
@@ -80,7 +79,65 @@ app.get('/guestbook', function (req, res) {
 
     // Send header, navbar, and table with the data as response
     res.send(contentString);
+});
 
+// New message -route ()
+app.get('/newmessage', function (req,res) {
+
+    // Get header and navbar
+    let content = fs.readFileSync(__dirname + '/newmessage.html', (err) => {
+        if (err) throw err;
+    });
+
+    // Transform to string, so it can be sent to browser
+    let contentString = content.toString();
+
+    // Send all content
+    res.send(contentString);
+})
+
+// New message (post)
+app.post('/newmessage', function (req, res) {
+
+    // Load guestbook data from file
+    let data = require('./guestbookData.json');
+
+    // Read content to variable
+    let content = fs.readFileSync(__dirname + '/newmessage.html', (err) => {
+        if (err) throw err;
+    });
+
+    // Transform content to string
+    let contentString = content.toString();
+
+    // Check if inputs are empty
+    if (req.body.name === "" ||
+    req.body.country === "" ||
+    req.body.message === "") {
+
+        contentString += "<p id='errortxt'>Sorry but you can't leave any of the fields empty.</p>"
+        res.end(contentString);
+    }
+    else {
+    // Create new JSON object and add it
+    data.push( {
+        "id": (data.length+1),
+        "username": req.body.name,
+        "country": req.body.country,
+        "date": Date(),
+        "message": req.body.message
+    });
+    }
+    // Conver the JSON object to string
+    let jsonStr = JSON.stringify(data);
+
+    // Save all data to the JSON file
+    fs.writeFile('guestbookData.json', jsonStr, (err) => {
+        if (err) throw err;
+    });
+
+    // Redirect user to the guestbook
+    res.redirect('/guestbook');
 });
 
 // The route 404

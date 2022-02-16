@@ -47,3 +47,13 @@
   margin-top: 2%;
   margin-left: 2%;
 }
+
+#addform {
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+#errortxt {
+  margin-left: 2%;
+  color: red;
+}
