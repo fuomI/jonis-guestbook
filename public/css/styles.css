@@ -1,0 +1,42 @@
+.footer {
+  background-color: rgb(191, 191, 194);
+  margin-top: 10%;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.header {
+  background-color: rgb(191, 191, 194);
+}
+
+#htext {
+  padding-left: 10%;
+}
+
+#h2text {
+  padding-left: 10%;
+  margin-bottom: 2%;
+}
+
+#ftext {
+  padding-left: 40%;
+}
+
+.menu {
+  background-color: rgb(191, 191, 194);
+}
+
+#ltext {
+  text-decoration: none;
+  font-size: 10px;
+}
+
+.cont {
+  padding-left: 2%;
+}
+
+#h3text {
+  padding-bottom: 1%;
+  border-bottom: solid 1px rgb(191, 191, 194);
+}

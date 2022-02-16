@@ -1,5 +1,5 @@
 {
-  "name": "Joni's Guestbook",
+  "name": "jonis-guestbook",
   "version": "1.0.0",
   "description": "Joni's guestbook app in Heroku",
   "main": "index.js",

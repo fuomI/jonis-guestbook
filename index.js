@@ -15,7 +15,8 @@ const bodyParser = require('body-parser');
 // Enable body parser
 app.use(bodyParser.urlencoded({extended: true}));
 
-
+// Serve static content from public dir
+app.use(express.static('public'));
 
 
 // THE ROUTES
