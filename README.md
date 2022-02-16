@@ -9,5 +9,8 @@ It is a guestbook web application which has a form for adding entries and a tabl
 ## Technologies
 - **Node.js**
 - **Express**
+
+## Styles
+- **Pure.CSS** 
 	
 *WORK IN PROGRESS*
