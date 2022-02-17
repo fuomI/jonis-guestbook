@@ -12,5 +12,13 @@ It is a guestbook web application which has a form for adding entries and a tabl
 
 ## Styles
 - **Pure.CSS** 
+
+## Problems
+
+**'Add entry (AJAX** is working locally but not on heroku at the moment.
+
+## How to run?
+
+Application is published on heroku: https://jonis-guestbook.herokuapp.com/
 	
 *WORK IN PROGRESS*
