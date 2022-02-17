@@ -65,8 +65,6 @@ app.get('/guestbook', function (req, res) {
 
     contentString += '</tbody>';
     contentString += '</table>';
-    contentString += '</body>';
-    contentString += '</html>';
 
     // Add footer
     let footer = fs.readFileSync(__dirname + '/public/pages/footer.html', (err) => {
@@ -76,6 +74,19 @@ app.get('/guestbook', function (req, res) {
     let footerContent = footer.toString();
 
     contentString += footerContent;
+    contentString += '</body>';
+
+    // Add responsive navibar script
+    let naviScript = fs.readFileSync(__dirname + '/public/js/responsiveNavi.js', (err) => {
+        if (err) throw err;
+    });
+
+    let naviString = naviScript.toString();
+
+    contentString += '<script>';
+    contentString += naviString;
+    contentString += '</script>'
+    contentString += '</html>';
 
     // Send header, navbar, and table with the data as response
     res.send(contentString);
