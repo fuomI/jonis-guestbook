@@ -148,9 +148,11 @@ app.get('/ajaxmessage', function (req,res) {
 });
 
 // /guestbookdata -route
-app.get('/guestbookdata', function (req,res) {
+app.post('/guestbookdata', function (req,res) {
 
     let data = require('./guestBookData.json');
+
+    let contentString = "";
 
     // Check if inputs are empty
     if (req.body.name === "" ||
@@ -179,6 +181,32 @@ app.get('/guestbookdata', function (req,res) {
         if (err) throw err;
     });
 
+    // Add table with data parsed into it
+    contentString += '<table class="pure-table" id="guestbook">';
+    contentString += '<thead>';
+    contentString += '<tr>';
+    contentString += '<th>#</th>';
+    contentString += '<th>Name</th>';
+    contentString += '<th>Country</th>';
+    contentString += '<th>Message</th>';
+    contentString += '</tr>';
+    contentString += '</thead>';
+    contentString += '<tbody>';
+
+    for (let i = 0; i < data.length; i++) {
+        contentString += '<tr>';
+        contentString += '<td>' + data[i].id + '</td>';
+        contentString += '<td>' + data[i].username + '</td>';
+        contentString += '<td>' + data[i].country + '</td>';
+        contentString += '<td>' + data[i].message + '</td>';
+        contentString += '</tr>';
+    }
+
+    contentString += '</tbody>';
+    contentString += '</table>';
+
+    // Send the table with data parsed into it as response
+    res.send(contentString);
 });
 
 // The route 404

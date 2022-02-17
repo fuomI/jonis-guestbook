@@ -38,7 +38,7 @@
         </div>
 
         <!-- AJAX message form -->
-        <form action="/ajaxmessage" class="pure-form" id="addform">
+        <form class="pure-form" id="addform">
             <fieldset>
                 <legend>Add a new message!</legend>
                 <input type="text" placeholder="Name" name="name" id="name">
@@ -73,34 +73,32 @@
                 let country = document.getElementById("country").value;
                 let message = document.getElementById("message").value;
 
-                // Let's make formData object
-                let formData = new FormData();
-                formData.append('name', name);
-                formData.append('country', country);
-                formData.append('message', message);
-
-                let formDataUsp = new URLSearchParams(formData);
-
-                // Asynchronous POST function
-                async () => {
-                    const response = await fetch('/guestbookdata', {
-                        method: 'POST',
-                        body: formDataUsp
-                    });
-                    // Wait promise to resolve and then save response to responseContent
-                    const responseContent = await response;
-
-                    // Save responseDiv into variable for quick use
-                    let resDiv = document.getElementById('resDiv');
-
-                    // If responseDiv is not empty, add response to it
-                    if (resDiv.innerHTML === "") {
-                        resDiv.innerHTML = responseContent;
-                    } else {
-                        resDiv.innerHTML = "";
+                // Create AJAX post call
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    // If ready state = 4 & status = 200
+                    if (this.readyState === 4 && this.status === 200) {
+                        // Put the response to the resDiv
+                        document.getElementById('resDiv').innerHTML = this.responseText;
                     }
-                }
+                };
+                // Send AJAX request 'POST' to /guestbookdata
+                xmlhttp.open("POST", "/guestbookdata", true);
+
+                // Set headers
+                xmlhttp.setRequestHeader(
+                    "Content-type",
+                    "application/x-www-form-urlencoded"
+                );
+
+                // Add data that we want to send to the server
+                xmlhttp.send("name=" + name + "&country=" + country + "&message=" + message);
             });
-        }
+
+            // Reset input fields
+            document.getElementById("name").value = "";
+            document.getElementById("country").value = "";
+            document.getElementById("message").value = "";
+        };
     </script>
 </html>

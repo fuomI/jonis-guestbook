@@ -1,6 +1,6 @@
 .footer {
   background-color: rgb(191, 191, 194);
-  margin-top: 10%;
+  margin-top: 15%;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -46,6 +46,7 @@
 #guestbook {
   margin-top: 2%;
   margin-left: 2%;
+  margin-bottom: 10%;
 }
 
 #addform {
