@@ -25,7 +25,7 @@ app.use(express.static('public'));
 // The default route
 app.get('/', function (req, res) {
     // Default route sends index.html as response
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname + "/public/pages/index.html");
 });
 
 // The guestbook route
@@ -35,7 +35,7 @@ app.get('/guestbook', function (req, res) {
     let data = require('./guestbookData.json');
 
     // Get header and navbar
-    let guestbookContent = fs.readFileSync(__dirname + '/guestbook.html', (err) => {
+    let guestbookContent = fs.readFileSync(__dirname + '/public/pages/guestbook.html', (err) => {
         if (err) throw err;
     });
 
@@ -43,7 +43,6 @@ app.get('/guestbook', function (req, res) {
     let contentString = guestbookContent.toString();
 
     // Add table with data parsed into it
-
     contentString += '<table class="pure-table" id="guestbook">';
     contentString += '<thead>';
     contentString += '<tr>';
@@ -56,7 +55,6 @@ app.get('/guestbook', function (req, res) {
     contentString += '<tbody>';
 
     for (let i = 0; i < data.length; i++) {
-
         contentString += '<tr>';
         contentString += '<td>' + data[i].id + '</td>';
         contentString += '<td>' + data[i].username + '</td>';
@@ -69,7 +67,7 @@ app.get('/guestbook', function (req, res) {
     contentString += '</table>';
 
     // Add footer
-    let footer = fs.readFileSync(__dirname + '/footer.html', (err) => {
+    let footer = fs.readFileSync(__dirname + '/public/pages/footer.html', (err) => {
         if (err) throw err;
     });
 
@@ -81,11 +79,11 @@ app.get('/guestbook', function (req, res) {
     res.send(contentString);
 });
 
-// New message -route ()
+// New message -route
 app.get('/newmessage', function (req,res) {
 
     // Get header and navbar
-    let content = fs.readFileSync(__dirname + '/newmessage.html', (err) => {
+    let content = fs.readFileSync(__dirname + '/public/pages/newmessage.html', (err) => {
         if (err) throw err;
     });
 
@@ -103,7 +101,7 @@ app.post('/newmessage', function (req, res) {
     let data = require('./guestbookData.json');
 
     // Read content to variable
-    let content = fs.readFileSync(__dirname + '/newmessage.html', (err) => {
+    let content = fs.readFileSync(__dirname + '/public/pages/newmessage.html', (err) => {
         if (err) throw err;
     });
 
@@ -138,6 +136,32 @@ app.post('/newmessage', function (req, res) {
 
     // Redirect user to the guestbook
     res.redirect('/guestbook');
+});
+
+// /ajaxmessage -route
+app.get('/ajaxmessage', function (req,res) {
+
+    // Read ajaxmessage.html to a variable
+    let content = fs.readFileSync(__dirname + '/public/pages/ajaxmessage.html', (err) => {
+        if (err) throw err;
+    });
+
+    // Transform content to string
+    let contentString = content.toString();
+
+    // Add footer
+    let footer = fs.readFileSync(__dirname + '/public/pages/footer.html', (err) => {
+        if (err) throw err;
+    });
+
+    // Transform footer to string
+    let footerString = footer.toString();
+
+    // Add footer to content
+    contentString += footerString;
+
+    // Send content as response
+    res.send(contentString);
 });
 
 // The route 404

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Pure.CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+	<link rel="stylesheet" href="css/styles.css">
+
+    <title>Joni's Guestbook</title>
+  </head>
+  <body>
+
+    <!-- Title -->
+    <div class="pure-g header">
+    <h1 class="pure-u-1" id="htext" >Joni's Guestbook</h1>
+    </div>
+
+    <!-- Navbar -->
+        <div class="pure-menu pure-menu-horizontal menu">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected">
+                    <a href="/" class="pure-menu-link">Home</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/newmessage" class="pure-menu-link">Add entry</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/guestbook" class="pure-menu-link">View guestbook</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/ajaxmessage" class="pure-menu-link">Add entry (AJAX)</a>
+                </li>
+            </ul>
+        </div>
+
+    <!-- Content -->
+    <div class="pure-g">
+        <div class="pure-u-1">
+            <h2 id="h2text"><i>Feel free to leave a message</i></h2>
+        </div>
+    </div>
+    <div class="pure-g">
+        <div class="pure-u-1-2 cont">
+            <img class="pure-img" src="images/pic.jpg" alt="Thunderstorm in a desert with two cliffs, Photo by Andy Vu from Pexels">
+            <a id="ltext" href="https://www.pexels.com/fi-fi/kuva/aamu-maisema-luonto-taivas-3244513/">Photo by Andy Vu from Pexels</a>
+        </div>
+
+        <div class="pure-u-1-4 cont">
+                <h3 id="h3text">What would you like to tell?</h3>
+                <p>You can leave a message to the guestbook from <b>'Add entry'</b> -page.
+                <br><br>If you'd like to see what others have written then please check <b>'View guestbook'</b> -page.
+                </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="pure-g footer" id="ftext">
+        <p class="pure-u-1">&copy; Joni Jansson 2022</p>
+    </div>
+
+  </body>
+</html>

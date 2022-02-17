@@ -25,29 +25,27 @@
                 <li class="pure-menu-item">
                     <a href="/" class="pure-menu-link">Home</a>
                 </li>
-                <li class="pure-menu-item pure-menu-selected">
+                <li class="pure-menu-item">
                     <a href="/newmessage" class="pure-menu-link">Add entry</a>
                 </li>
                 <li class="pure-menu-item">
                     <a href="/guestbook" class="pure-menu-link">View guestbook</a>
                 </li>
+                <li class="pure-menu-item pure-menu-selected">
+                    <a href="/ajaxmessage" class="pure-menu-link">Add entry (AJAX)</a>
+                </li>
             </ul>
         </div>
 
-    <!-- New message form -->
-        <form method="post" action="/newmessage" class="pure-form" id="addform">
+    <!-- AJAX message form -->
+        <form action="/ajaxmessage" class="pure-form" id="addform">
             <fieldset>
                 <legend>Add a new message!</legend>
-                <input type="text" placeholder="Name" name="name">
-                <input type="text" placeholder="Country" name="country">
+                <input type="text" placeholder="Name" name="name" id="name">
+                <input type="text" placeholder="Country" name="country" id="country">
             </fieldset>
             <fieldset>
-             <textarea placeholder="Message.." name="message"></textarea>
+             <textarea placeholder="Message.." name="message" id="message"></textarea>
             </fieldset>
-            <button type="submit" class="pure-button pure-button-primary">Send</button>
+            <button type="submit" class="pure-button pure-button-primary" id="sendBtn">Send</button>
         </form>
-
-    <!-- Footer -->
-    <div class="pure-g footer" id="ftext">
-        <p class="pure-u-1">&copy; Joni Jansson 2022</p>
-    </div>
