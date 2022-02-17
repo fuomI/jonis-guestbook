@@ -65,6 +65,8 @@ app.get('/guestbook', function (req, res) {
 
     contentString += '</tbody>';
     contentString += '</table>';
+    contentString += '</body>';
+    contentString += '</html>';
 
     // Add footer
     let footer = fs.readFileSync(__dirname + '/public/pages/footer.html', (err) => {
@@ -141,27 +143,42 @@ app.post('/newmessage', function (req, res) {
 // /ajaxmessage -route
 app.get('/ajaxmessage', function (req,res) {
 
-    // Read ajaxmessage.html to a variable
-    let content = fs.readFileSync(__dirname + '/public/pages/ajaxmessage.html', (err) => {
+    // Send file (ajaxmessage.html) as response
+    res.sendFile(__dirname + '/public/pages/ajaxmessage.html');
+});
+
+// /guestbookdata -route
+app.get('/guestbookdata', function (req,res) {
+
+    let data = require('./guestBookData.json');
+
+    // Check if inputs are empty
+    if (req.body.name === "" ||
+    req.body.country === "" ||
+    req.body.message === "") {
+
+        contentString = "<p id='errortxt'>Sorry but you can't leave any of the fields empty.</p>"
+        res.end(contentString);
+    }
+    else {
+    // Create new JSON object and add it
+    data.push( {
+        "id": (data.length+1),
+        "username": req.body.name,
+        "country": req.body.country,
+        "date": Date(),
+        "message": req.body.message
+    });
+    }
+
+    // Convert the JSON to string
+    let jsonStr = JSON.stringify(data);
+
+    // Save all data to the file guestbookData.json
+    fs.writeFile('guestbookData.json', jsonStr, (err) => {
         if (err) throw err;
     });
 
-    // Transform content to string
-    let contentString = content.toString();
-
-    // Add footer
-    let footer = fs.readFileSync(__dirname + '/public/pages/footer.html', (err) => {
-        if (err) throw err;
-    });
-
-    // Transform footer to string
-    let footerString = footer.toString();
-
-    // Add footer to content
-    contentString += footerString;
-
-    // Send content as response
-    res.send(contentString);
 });
 
 // The route 404

@@ -1,25 +1,25 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Pure.CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
-	<link rel="stylesheet" href="css/styles.css">
+        <!-- Pure.CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+        <link rel="stylesheet" href="css/styles.css">
 
-    <title>Joni's Guestbook</title>
-  </head>
-  <body>
+        <title>Joni's Guestbook</title>
+    </head>
+    <body>
 
-    <!-- Title -->
-    <div class="pure-g header">
-    <h1 class="pure-u-1" id="htext" >Joni's Guestbook</h1>
-    </div>
+        <!-- Title -->
+        <div class="pure-g header">
+        <h1 class="pure-u-1" id="htext" >Joni's Guestbook</h1>
+        </div>
 
-    <!-- Navbar -->
+        <!-- Navbar -->
         <div class="pure-menu pure-menu-horizontal menu">
             <ul class="pure-menu-list">
                 <li class="pure-menu-item">
@@ -37,7 +37,7 @@
             </ul>
         </div>
 
-    <!-- AJAX message form -->
+        <!-- AJAX message form -->
         <form action="/ajaxmessage" class="pure-form" id="addform">
             <fieldset>
                 <legend>Add a new message!</legend>
@@ -45,7 +45,62 @@
                 <input type="text" placeholder="Country" name="country" id="country">
             </fieldset>
             <fieldset>
-             <textarea placeholder="Message.." name="message" id="message"></textarea>
+                <textarea placeholder="Message.." name="message" id="message"></textarea>
             </fieldset>
-            <button type="submit" class="pure-button pure-button-primary" id="sendBtn">Send</button>
+            <button type="button" class="pure-button pure-button-primary" id="sendBtn">Send</button>
         </form>
+
+        <div id="resDiv"></div>
+
+        <!-- Footer -->
+        <div class="pure-g footer" id="ftext">
+            <p class="pure-u-1">&copy; Joni Jansson 2022</p>
+        </div>
+    </body>
+    <script>
+
+        // When page has loaded
+        window.onload = (event) => {
+
+            // Save sendBtn to variable
+            let btn = document.getElementById("sendBtn");
+
+            // add event listener to the btn
+            btn.addEventListener("click", function () {
+
+                // Read form fields and save to variables
+                let name = document.getElementById("name").value;
+                let country = document.getElementById("country").value;
+                let message = document.getElementById("message").value;
+
+                // Let's make formData object
+                let formData = new FormData();
+                formData.append('name', name);
+                formData.append('country', country);
+                formData.append('message', message);
+
+                let formDataUsp = new URLSearchParams(formData);
+
+                // Asynchronous POST function
+                async () => {
+                    const response = await fetch('/guestbookdata', {
+                        method: 'POST',
+                        body: formDataUsp
+                    });
+                    // Wait promise to resolve and then save response to responseContent
+                    const responseContent = await response;
+
+                    // Save responseDiv into variable for quick use
+                    let resDiv = document.getElementById('resDiv');
+
+                    // If responseDiv is not empty, add response to it
+                    if (resDiv.innerHTML === "") {
+                        resDiv.innerHTML = responseContent;
+                    } else {
+                        resDiv.innerHTML = "";
+                    }
+                }
+            });
+        }
+    </script>
+</html>
