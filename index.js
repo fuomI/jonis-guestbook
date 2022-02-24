@@ -127,6 +127,7 @@ app.post('/newmessage', function (req, res) {
 
         contentString += "<p id='errortxt'>Sorry but you can't leave any of the fields empty.</p>"
         res.end(contentString);
+        return;
     }
     else {
     // Create new JSON object and add it
@@ -160,6 +161,8 @@ app.get('/ajaxmessage', function (req,res) {
 // /guestbookdata -route
 app.post('/guestbookdata', function (req,res) {
 
+    console.log(req.body);
+
     let data = require('./guestBookData.json');
 
     let contentString = "";
@@ -171,6 +174,7 @@ app.post('/guestbookdata', function (req,res) {
 
         contentString = "<p id='errortxt'>Sorry but you can't leave any of the fields empty.</p>"
         res.end(contentString);
+        return;
     }
     else {
     // Create new JSON object and add it
