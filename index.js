@@ -161,8 +161,6 @@ app.get('/ajaxmessage', function (req,res) {
 // /guestbookdata -route
 app.post('/guestbookdata', function (req,res) {
 
-    console.log(req.body);
-
     let data = require('./guestbookData.json');
 
     let contentString = "";
