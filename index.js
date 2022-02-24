@@ -163,7 +163,7 @@ app.post('/guestbookdata', function (req,res) {
 
     console.log(req.body);
 
-    let data = require('./guestBookData.json');
+    let data = require('./guestbookData.json');
 
     let contentString = "";
 
