@@ -86,6 +86,7 @@
 
             // add event listener to the btn
             btn.addEventListener("click", function () {
+                event.preventDefault();
 
                 // Read form fields and save to variables
                 let name = document.getElementById("name").value;
@@ -114,12 +115,12 @@
 
                 // Add data that we want to send to the server
                 xmlhttp.send(formData);
-            });
 
-            // Reset input fields
-            document.getElementById("name").value = "";
-            document.getElementById("country").value = "";
-            document.getElementById("message").value = "";
+                // Reset input fields
+                document.getElementById("name").value = "";
+                document.getElementById("country").value = "";
+                document.getElementById("message").value = "";
+            });
         };
     </script>
 </html>

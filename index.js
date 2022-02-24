@@ -30,8 +30,13 @@ app.get('/', function (req, res) {
 // The guestbook route
 app.get('/guestbook', function (req, res) {
 
-    // Load guestbook data
-    let data = require('./guestbookData.json');
+    // Read data and store to variable jsonData
+    let data = fs.readFileSync("guestbookData.json", (err) => {
+        if (err) throw err;
+    });
+
+    // Parse data to jsonData
+    let jsonData = JSON.parse(data.toString());
 
     // Get header and navbar
     let guestbookContent = fs.readFileSync(__dirname + '/public/pages/guestbook.html', (err) => {
@@ -53,12 +58,12 @@ app.get('/guestbook', function (req, res) {
     contentString += '</thead>';
     contentString += '<tbody>';
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < jsonData.length; i++) {
         contentString += '<tr>';
-        contentString += '<td>' + data[i].id + '</td>';
-        contentString += '<td>' + data[i].username + '</td>';
-        contentString += '<td>' + data[i].country + '</td>';
-        contentString += '<td>' + data[i].message + '</td>';
+        contentString += '<td>' + jsonData[i].id + '</td>';
+        contentString += '<td>' + jsonData[i].username + '</td>';
+        contentString += '<td>' + jsonData[i].country + '</td>';
+        contentString += '<td>' + jsonData[i].message + '</td>';
         contentString += '</tr>';
     }
 
@@ -109,8 +114,13 @@ app.get('/newmessage', function (req,res) {
 // New message (post)
 app.post('/newmessage', function (req, res) {
 
-    // Load guestbook data from file
-    let data = require('./guestbookData.json');
+    // Read data and store to variable jsonData
+    let data = fs.readFileSync("guestbookData.json", (err) => {
+        if (err) throw err;
+    });
+
+    // Parse data to jsonData
+    let jsonData = JSON.parse(data.toString());
 
     // Read content to variable
     let content = fs.readFileSync(__dirname + '/public/pages/newmessage.html', (err) => {
@@ -131,8 +141,8 @@ app.post('/newmessage', function (req, res) {
     }
     else {
     // Create new JSON object and add it
-    data.push( {
-        "id": (data.length+1),
+    jsonData.push( {
+        "id": (jsonData.length+1),
         "username": req.body.name,
         "country": req.body.country,
         "date": Date(),
@@ -140,7 +150,7 @@ app.post('/newmessage', function (req, res) {
     });
     }
     // Conver the JSON object to string
-    let jsonStr = JSON.stringify(data);
+    let jsonStr = JSON.stringify(jsonData);
 
     // Save all data to the JSON file
     fs.writeFile('guestbookData.json', jsonStr, (err) => {
@@ -161,7 +171,13 @@ app.get('/ajaxmessage', function (req,res) {
 // /guestbookdata -route
 app.post('/guestbookdata', function (req,res) {
 
-    let data = require('./guestbookData.json');
+    // Read data and store to variable jsonData
+    let data = fs.readFileSync("guestbookData.json", (err) => {
+        if (err) throw err;
+    });
+
+    // Parse data to jsonData
+    let jsonData = JSON.parse(data.toString());
 
     let contentString = "";
 
@@ -176,8 +192,8 @@ app.post('/guestbookdata', function (req,res) {
     }
     else {
     // Create new JSON object and add it
-    data.push( {
-        "id": (data.length+1),
+    jsonData.push( {
+        "id": (jsonData.length+1),
         "username": req.body.name,
         "country": req.body.country,
         "date": Date(),
@@ -186,7 +202,7 @@ app.post('/guestbookdata', function (req,res) {
     }
 
     // Convert the JSON to string
-    let jsonStr = JSON.stringify(data);
+    let jsonStr = JSON.stringify(jsonData);
 
     // Save all data to the file guestbookData.json
     fs.writeFile('guestbookData.json', jsonStr, (err) => {
@@ -205,12 +221,12 @@ app.post('/guestbookdata', function (req,res) {
     contentString += '</thead>';
     contentString += '<tbody>';
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < jsonData.length; i++) {
         contentString += '<tr>';
-        contentString += '<td>' + data[i].id + '</td>';
-        contentString += '<td>' + data[i].username + '</td>';
-        contentString += '<td>' + data[i].country + '</td>';
-        contentString += '<td>' + data[i].message + '</td>';
+        contentString += '<td>' + jsonData[i].id + '</td>';
+        contentString += '<td>' + jsonData[i].username + '</td>';
+        contentString += '<td>' + jsonData[i].country + '</td>';
+        contentString += '<td>' + jsonData[i].message + '</td>';
         contentString += '</tr>';
     }
 
