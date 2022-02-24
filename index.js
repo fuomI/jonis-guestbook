@@ -222,7 +222,7 @@ app.post('/guestbookdata', function (req,res) {
 
 // The route 404
 app.get('*', function (req, res) {
-    res.send("Can't find the requested page", 404);
+    res.status(404).send("Can't find the requested page");
 });
 
 // App listens PORT:

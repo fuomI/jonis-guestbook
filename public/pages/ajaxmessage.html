@@ -92,6 +92,8 @@
                 let country = document.getElementById("country").value;
                 let message = document.getElementById("message").value;
 
+                const formData = new URLSearchParams({name:name, country:country, message:message}).toString();
+
                 // Create AJAX post call
                 let xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function () {
@@ -111,7 +113,7 @@
                 );
 
                 // Add data that we want to send to the server
-                xmlhttp.send("name=" + name + "&country=" + country + "&message=" + message);
+                xmlhttp.send(formData);
             });
 
             // Reset input fields
