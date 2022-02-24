@@ -1,7 +1,6 @@
 // Import express, file system, node-fetch
 const express = require('express');
 const fs = require('fs');
-const fetch = require('node-fetch');
 
 // Start express
 const app = express();
@@ -160,10 +159,6 @@ app.get('/ajaxmessage', function (req,res) {
 
 // /guestbookdata -route
 app.post('/guestbookdata', function (req,res) {
-
-    console.log(req.body.name);
-    console.log(req.body.country);
-    console.log(req.body.message);
 
     let data = require('./guestBookData.json');
 
