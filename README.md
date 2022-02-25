@@ -31,6 +31,13 @@ It is a guestbook web application which has a form for adding entries and a tabl
 
 Application is published on Heroku: https://jonis-guestbook.herokuapp.com/
 
+### 3. Make it look nice
+
+- I used **Pure.CSS** classes for responsive and clean look
+- Added additional JavaScript code for each page, which
+  checks the screen size and sets the navigation menu
+  to horizontal and vertical depending on the screen size
+
 ## Technologies
 
 - **Node.js**
