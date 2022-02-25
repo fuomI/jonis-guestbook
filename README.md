@@ -37,6 +37,12 @@ Application is published on Heroku: https://jonis-guestbook.herokuapp.com/
 - Added additional JavaScript code for each page, which
   checks the screen size and sets the navigation menu
   to horizontal and vertical depending on the screen size
+  
+## Languages
+
+- **JavaScript**
+- **HTML**
+- **CSS**
 
 ## Technologies
 
